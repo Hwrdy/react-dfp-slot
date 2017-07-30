@@ -10,8 +10,10 @@
 
   "rules": {
     "arrow-parens": "off",
+    "arrow-body-style": "off",
     "no-mixed-operators": [2, { "allowSamePrecedence": true }],
     "no-undef": "off",
+    "no-underscore-dangle": "off",
     "max-len": "off",
     "react/no-did-mount-set-state": 0, // necessary for server-rendering
     "jsx-a11y/no-static-element-interactions": "off",

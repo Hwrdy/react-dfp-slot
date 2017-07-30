@@ -8,7 +8,8 @@
     "build:js": "webpack --env build",
     "build:css": "node-sass src/style.scss lib/style.css --output-style compressed",
     "lint-staged": "lint-staged",
-    "dev": "webpack --progress --colors --watch --env dev"
+    "dev": "webpack --progress --colors --watch --env dev",
+    "test": "jest"
   },
   "lint-staged": {
     "*.js": [
@@ -40,6 +41,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "enzyme": "^2.9.1",
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-airbnb-base": "^11.3.1",
@@ -47,9 +49,12 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
+    "jest": "^20.0.4",
     "lint-staged": "^4.0.2",
     "node-sass": "^4.5.3",
     "pre-commit": "^1.2.2",
+    "react-dom": "^15.6.1",
+    "react-test-renderer": "^15.6.1",
     "webpack": "^3.4.1",
     "yargs": "^8.0.2"
   },
