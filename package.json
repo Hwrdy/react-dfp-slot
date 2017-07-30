@@ -58,5 +58,8 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-waypoint": "^7.0.4"
+  },
+  "engines": {
+    "node": ">=4.2.4"
   }
 }
