@@ -64,6 +64,18 @@
     "react": "^15.6.1",
     "react-waypoint": "^7.0.4"
   },
+  "keywords": [
+    "react",
+    "gpt",
+    "dfp",
+    "google dfp",
+    "advertising",
+    "react-component",
+    "ad unit",
+    "double click",
+    "babel",
+    "es6"
+  ],
   "engines": {
     "node": ">=4.2.4"
   }

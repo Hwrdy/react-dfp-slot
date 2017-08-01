@@ -5,10 +5,10 @@ import debounce from 'lodash.debounce';
 export default class DFPProvider extends Component {
   static childContextTypes = {
     getAdCount: PropTypes.func,
-    getIsAdReady: PropTypes.func,
-    setIsAdReady: PropTypes.func,
-    getComponentMounted: PropTypes.func,
-    setComponentMounted: PropTypes.func,
+    getIsSlotAdReady: PropTypes.func,
+    setIsSlotAdReady: PropTypes.func,
+    getIsComponentMounted: PropTypes.func,
+    setIsComponentMounted: PropTypes.func,
     addAdSlot: PropTypes.func,
     addUnRefreshedAdCount: PropTypes.func,
     refreshAds: PropTypes.func,
@@ -25,6 +25,25 @@ export default class DFPProvider extends Component {
     collapseEmptyDivs: false,
     onSlotRenderEnded: undefined,
   };
+
+  static loadGPTAsync() {
+    return new Promise((resolve, reject) => {
+      window.googletag = window.googletag || {};
+      window.googletag.cmd = window.googletag.cmd || [];
+
+      const scriptTag = document.createElement('script');
+      scriptTag.src = `${document.location.protocol}//www.googletagservices.com/tag/js/gpt.js`;
+      scriptTag.async = true;
+      scriptTag.type = 'text/javascript';
+      scriptTag.onerror = errs => {
+        reject(errs);
+      };
+      scriptTag.onload = () => {
+        resolve(window.googletag);
+      };
+      document.getElementsByTagName('head')[0].appendChild(scriptTag);
+    });
+  }
 
   static InitGPT(collapseEmptyDivs = false) {
     googletag.cmd.push(() => {
@@ -47,17 +66,17 @@ export default class DFPProvider extends Component {
     this.unRefreshedAdCount = 0;
     this.isGPTInitialized = false;
     this.adSlots = [];
-    this.adState = {};
+    this.renderEndedSlots = {};
     this.mountedComponents = {};
   }
 
   getChildContext() {
     return {
       getAdCount: this.getAdCount,
-      getIsAdReady: this.getIsAdReady,
-      setIsAdReady: this.setIsAdReady,
-      getComponentMounted: this.getComponentMounted,
-      setComponentMounted: this.setComponentMounted,
+      getIsSlotAdReady: this.getIsSlotAdReady,
+      setIsSlotAdReady: this.setIsSlotAdReady,
+      getIsComponentMounted: this.getIsComponentMounted,
+      setIsComponentMounted: this.setIsComponentMounted,
       addAdSlot: this.addAdSlot,
       addUnRefreshedAdCount: this.addUnRefreshedAdCount,
       refreshAds: this.refreshAds,
@@ -67,7 +86,9 @@ export default class DFPProvider extends Component {
 
   componentWillMount() {
     if (typeof window !== 'undefined' && !this.isGPTInitialized) {
-      this.constructor.InitGPT(this.props.collapseEmptyDivs);
+      this.constructor.loadGPTAsync().then(() => {
+        this.constructor.InitGPT(this.props.collapseEmptyDivs);
+      });
     }
   }
 
@@ -89,19 +110,23 @@ export default class DFPProvider extends Component {
     return this.adCount;
   }
 
-  getIsAdReady = adType => this.adState[`type-${adType}`];
+  getIsSlotAdReady = slotId => this.renderEndedSlots[`slot-${slotId}`];
 
-  setIsAdReady = (adType = undefined, isReady = false) => {
-    if (adType) {
-      this.adState[`type-${adType}`] = isReady;
+  setIsSlotAdReady = (slotId = undefined, isReady = false) => {
+    if (slotId) {
+      this.renderEndedSlots[`slot-${slotId}`] = isReady;
     }
   };
 
-  getComponentMounted = componentName => componentName && this.mountedComponents[componentName];
+  getIsComponentMounted = componentName => componentName && this.mountedComponents[componentName];
 
-  setComponentMounted = (componentName, isMounted) => {
+  setIsComponentMounted = (componentName, isMounted, doRefreshAds = false) => {
     if (componentName) {
       this.mountedComponents[componentName] = isMounted;
+
+      if (doRefreshAds) {
+        this.refreshAds();
+      }
     }
   };
 
