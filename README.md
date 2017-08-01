@@ -27,9 +27,9 @@ A React component library to execute Google DFP logic.
 	render() {
 	  return (
 	    <DFPProvider>
-	  	   <section className={appClassName}>
-	  	     ...
-	  	   </section>
+	      <section className={appClassName}>
+	        ...
+	      </section>
 	    </DFPProvider>
 	  );
 	}
