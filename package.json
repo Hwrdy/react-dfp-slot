@@ -1,6 +1,6 @@
 {
   "name": "react-dfp-slot",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React based DFP library",
   "main": "lib/ReactDFPSlot.min.js",
   "scripts": {
@@ -65,16 +65,18 @@
     "react-waypoint": "^7.0.4"
   },
   "keywords": [
-    "react",
-    "gpt",
-    "dfp",
-    "google dfp",
-    "advertising",
-    "react-component",
     "ad unit",
-    "double click",
+    "adunit",
+    "advertising",
     "babel",
-    "es6"
+    "dfp",
+    "doubleclick",
+    "es6",
+    "gpt",
+    "google dfp",
+    "react",
+    "react dfp",
+    "react-component"
   ],
   "engines": {
     "node": ">=4.2.4"

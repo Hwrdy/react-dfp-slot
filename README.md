@@ -1,5 +1,5 @@
 # react-dfp-slot
-
+[![npm version](https://badge.fury.io/js/react-dfp-slot.svg)](http://badge.fury.io/js/react-dfp-slot)
 
 A React component library to execute Google DFP logic.
 
@@ -11,9 +11,9 @@ A React component library to execute Google DFP logic.
 	```bash
 	yarn add react-dfp-slot
 	```
-	
-	or 
-	
+
+	or
+
 	```bash
 	npm install react-dfp-slot
 	```
@@ -23,7 +23,7 @@ A React component library to execute Google DFP logic.
 	```jsx
 	// App.js
 	import { DFPProvider } from 'react-dfp-slot';
-	
+
 	render() {
 	  return (
 	    <DFPProvider>
@@ -33,14 +33,14 @@ A React component library to execute Google DFP logic.
 	    </DFPProvider>
 	  );
 	}
-	
+
 	```
 
 3. Add AdSlot component with profile
 
 	```jsx
 	import { AdSlot } from 'react-dfp-slot';
-	
+
 	class SomeComponent extends Component {
 	  ...
 	  render() {
@@ -78,7 +78,7 @@ A React component library to execute Google DFP logic.
       clearAdSlots: this.clearAdSlots,
     };
   }
-``` 
+```
 
 #### getIsSlotAdReady(slotName)
 Get target slot is ready to display or not
@@ -112,7 +112,7 @@ Clear all unrefreshed slots
 
 ### Props
 ```jsx
-propTypes: {   
+propTypes: {
   /**
    * Enables or disables collapsing of slot divs so that they don't
    * take up any space on the page when there is no ad content to display.
@@ -130,13 +130,13 @@ propTypes: {
 
 - provider: child context from DFPProvider
 - event: [GPT event](https://developers.google.com/doubleclick-gpt/reference#googletageventsslotrenderendedevent)
-	
-	
+
+
 ```js
 // example
 handleSlotRenderEnded = (provider, event) => {
     const adElement = document.getElementById(`${event.slot.getSlotElementId()}-container`);
-	
+
     switch (event.slot.getAdUnitPath()) {
       case AdProfiles.idleBannerCenter.path: {
         provider.setIsSlotAdReady(AdProfiles.idleBannerCenter.name, !event.isEmpty);
@@ -145,7 +145,7 @@ handleSlotRenderEnded = (provider, event) => {
       default:
         break;
     }
-	
+
     if (event.isEmpty && adElement) {
       adElement.style.display = 'block';
     }
@@ -161,27 +161,23 @@ handleSlotRenderEnded = (provider, event) => {
   const SIZE_TYPE = PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.string, PropTypes.number]),
   );
-  
-  
-  /*
+
+
+  /* if responsive break point is [0, 0] and [1300, 0] ([width, height])
   [
     [
-      [1300,0],
-      [[1, 1], [970, 90]],
+      [0,0],
+      [[1, 1], [650, 60], 'fluid'],
     ],
     [
       [1300, 0],
-      [300, 250],
-    ],
-    [
-      [1300, 0],
-      'fluid',
-    ],
+      [[1, 1], [800, 60], 'fluid']
+    ]
   ]
   */
   const MULTI_SIZE_TYPE = PropTypes.arrayOf(PropTypes.arrayOf(AD_SIZE_TYPE));
-  
-  
+
+
   const ProfilePropType = PropTypes.shape({
     path: PropTypes.string,           // DFP code
     name: PropTypes.string,           // slot name
@@ -191,20 +187,20 @@ handleSlotRenderEnded = (provider, event) => {
     waitingFor: PropTypes.string,     // refresh ads after component didmount
     hideOnInitial: PropTypes.bool,    // set display: none; on initial
   });
-  
-  propTypes: {   
+
+  propTypes: {
     // Profile data for slot
     profile: ProfilePropType.isRequired,
-    
+
     // class name
     className: PropTypes.string,
-    
+
     // Init slot after specific millisecond
     asyncInit: PropTypes.number,
-    
+
     // use lazyLoading mode
     lazyLoading: PropTypes.bool,
-    
+
     /**
      * `topOffset` can either be a number, in which case its a distance from the
      * top of the container in pixels, or a string value. Valid string values are
@@ -215,12 +211,12 @@ handleSlotRenderEnded = (provider, event) => {
      * the top of the containing element.
      */
     lazyLoadingTopOffset: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    
+
     /**
      * `bottomOffset` is like `topOffset`, but for the bottom of the container.
      */
     lazyLoadingBottomOffset: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    
+
     // DFP setTargeting
     targetValue: PropTypes.arrayOf(PropTypes.string),
 
