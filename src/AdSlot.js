@@ -48,11 +48,11 @@ export default class AdSlot extends Component {
 
   static contextTypes = {
     getAdCount: PropTypes.func,
-    getComponentMounted: PropTypes.func,
+    getIsComponentMounted: PropTypes.func,
     addUnRefreshedAdCount: PropTypes.func,
     addAdSlot: PropTypes.func,
     refreshAds: PropTypes.func,
-    setIsAdReady: PropTypes.func,
+    setIsSlotAdReady: PropTypes.func,
   };
 
   static defaultProps = {
@@ -181,7 +181,7 @@ export default class AdSlot extends Component {
     this.context.addAdSlot(this.slot);
 
     if (profile.waitingFor) {
-      if (this.context.getComponentMounted(profile.waitingFor)) {
+      if (this.context.getIsComponentMounted(profile.waitingFor)) {
         this.context.refreshAds();
       }
     } else {
