@@ -138,7 +138,7 @@ export default class AdSlot extends Component {
         let mapping = googletag.sizeMapping();
 
         for (let i = 0; i < profile.multiSize.length; i += 1) {
-          mapping = mapping.addSize(profile.multiSize[i][0], profile.multiSize[i][1]);
+          mapping.addSize(profile.multiSize[i][0], profile.multiSize[i][1]);
         }
 
         mapping = mapping.build();
