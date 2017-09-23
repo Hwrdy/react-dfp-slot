@@ -130,10 +130,6 @@ export default class DFPProvider extends Component {
     }
   };
 
-  addUnRefreshedAdCount = () => {
-    this.unRefreshedAdCount = this.unRefreshedAdCount + 1;
-  };
-
   addAdSlot = slot => {
     this.adSlots.push(slot);
   };
