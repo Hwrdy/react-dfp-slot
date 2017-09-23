@@ -8,7 +8,12 @@ const env = require('yargs').argv.env; // use --env with webpack 2
 
 const libraryName = 'ReactDFPSlot';
 
-const plugins = [];
+const plugins = [
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify('production')
+  }),
+  new webpack.optimize.ModuleConcatenationPlugin(),
+];
 let outputFile;
 
 if (env === 'build') {
