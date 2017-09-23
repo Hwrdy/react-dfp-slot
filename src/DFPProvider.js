@@ -19,11 +19,13 @@ export default class DFPProvider extends Component {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
     collapseEmptyDivs: PropTypes.bool,
     onSlotRenderEnded: PropTypes.func,
+    loadGPT: PropTypes.bool,
   };
 
   static defaultProps = {
     collapseEmptyDivs: false,
     onSlotRenderEnded: undefined,
+    loadGPT: true,
   };
 
   static loadGPTAsync() {
@@ -86,9 +88,13 @@ export default class DFPProvider extends Component {
 
   componentWillMount() {
     if (typeof window !== 'undefined' && !this.isGPTInitialized) {
-      this.constructor.loadGPTAsync().then(() => {
+      if (this.props.loadGPT) {
+        this.constructor.loadGPTAsync().then(() => {
+          this.constructor.InitGPT(this.props.collapseEmptyDivs);
+        });
+      } else {
         this.constructor.InitGPT(this.props.collapseEmptyDivs);
-      });
+      }
     }
   }
 
