@@ -1,6 +1,6 @@
 {
   "name": "react-dfp-slot",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "React based DFP library",
   "main": "lib/index.js",
   "scripts": {
