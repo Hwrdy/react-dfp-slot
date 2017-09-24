@@ -196,7 +196,7 @@ export default class AdSlot extends Component {
 
     const { profile, lazyLoading, lazyLoadingTopOffset, lazyLoadingBottomOffset, className } = this.props;
     const adStyles = {};
-    const adClassNames = profile.className || className || 'cnyes-dfp-banner';
+    const adClassNames = profile.className || className;
 
     if (profile.hideOnInitial) {
       adStyles.display = 'none';
