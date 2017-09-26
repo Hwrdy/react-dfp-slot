@@ -1,6 +1,6 @@
 {
   "name": "react-dfp-slot",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "React based DFP library",
   "main": "lib/index.js",
   "scripts": {
@@ -59,10 +59,12 @@
     "webpack": "^3.4.1"
   },
   "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0",
+    "react-dom": "^0.14.0 || ^15.0.0"
+  },
+  "dependencies": {
     "lodash.debounce": ">= 4.0.3",
     "prop-types": ">= 15.5.10",
-    "react": "^0.14.0 || ^15.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0",
     "react-waypoint": ">= 7.0.0"
   },
   "keywords": [
