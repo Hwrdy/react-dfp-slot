@@ -63,8 +63,8 @@
     "react-dom": "^0.14.0 || ^15.0.0"
   },
   "dependencies": {
-    "react": "^0.14.0 || ^15.0.0 || ^16.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "lodash.debounce": ">= 4.0.3",
     "prop-types": ">= 15.5.10",
     "react-waypoint": ">= 7.0.0"
