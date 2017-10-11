@@ -74,7 +74,7 @@ export default class AdSlot extends Component {
   }
 
   componentWillMount() {
-    if (!this.slotId) {
+    if (!this.slotId && this.props.profile) {
       this.slotId = this.props.profile.name ?
         `div-gpt-ad-${this.props.profile.name}-${this.context.getAdCount()}` :
         `div-gpt-ad-${this.context.getAdCount()}`;
@@ -147,6 +147,8 @@ export default class AdSlot extends Component {
           .defineSlot(profile.path, size, slotId)
           .defineSizeMapping(mapping)
           .addService(googletag.pubads());
+      } else if (profile.outOfPage) {
+        this.slot = googletag.defineOutOfPageSlot(profile.path, slotId).addService(googletag.pubads());
       } else {
         this.slot = googletag.defineSlot(profile.path, profile.size, slotId).addService(googletag.pubads());
       }
